@@ -1,6 +1,6 @@
 # M2R — Migrate to Rebecca
 
-[فارسی](#فارسی) | [English](#english)
+[فارسی](#فارسی) | [English](#english) | [GitHub](https://github.com/ali-ar1/M2R)
 
 ---
 
@@ -17,15 +17,19 @@
 | 3x-ui | ✅ | — | ✅ |
 | **Rebecca (مقصد)** | — | ✅ | — |
 
+### نصب و اجرا (یک خطی)
+با کاربر root روی سرور بزنید:
+```bash
+bash <(curl -Ls https://raw.githubusercontent.com/ali-ar1/M2R/main/m2r.sh)
+```
+
+اسکریپت اول خودش پیش‌نیازها را نصب می‌کند (`python3`، کلاینت `mysql` و `psql`، و `bcrypt` و `xxhash` برای پایتون). روی Debian/Ubuntu با `apt` و روی CentOS/Alma/Rocky با `dnf`/`yum`. بعد آخرین نسخه `m2r.py` را در `/opt/M2R` دانلود و اجرا می‌کند.
+
 ### پیش‌نیاز
-- `python3` (فقط کتابخانه استاندارد، نصب پکیج لازم نیست)
-- برای MySQL/PostgreSQL: کلاینت `mysql` / `psql` روی سرور، یا اینکه دیتابیس داخل داکر در حال اجرا باشد (اسکریپت خودش کانتینر را پیدا می‌کند)
+- اگر کلاینت دیتابیس نصب نشد، دیتابیسی که داخل داکر اجرا می‌شود هم کار می‌کند (اسکریپت خودش کانتینر را پیدا می‌کند)
 - ربکا باید روی **MySQL یا MariaDB** نصب باشد و حداقل یک بار اجرا شده باشد
 
-### اجرا
-```bash
-python3 m2r.py
-```
+### منو
 ```
 1) Exporting
 2) Importing
@@ -93,15 +97,20 @@ python3 m2r.py
 | 3x-ui | ✅ | — | ✅ |
 | **Rebecca (target)** | — | ✅ | — |
 
+### Install & run (one line)
+As root on the server:
+```bash
+bash <(curl -Ls https://raw.githubusercontent.com/ali-ar1/M2R/main/m2r.sh)
+```
+
+The launcher first installs the prerequisites (`python3`, the `mysql` and `psql` clients, and Python's `bcrypt` and `xxhash`) with `apt` on Debian/Ubuntu or `dnf`/`yum` on CentOS/Alma/Rocky. It then downloads the latest `m2r.py` to `/opt/M2R` and runs it.
+
 ### Requirements
-- `python3` (standard library only, nothing to install)
-- For MySQL/PostgreSQL: the `mysql` / `psql` client on the host, or the database running in docker (the script finds the container)
+- If a database client can't be installed, a database running in docker still works (the script finds the container)
 - Rebecca on **MySQL or MariaDB**, started at least once so its tables exist
 
 ### Usage
-```bash
-python3 m2r.py
-```
+Manual run without the launcher: `python3 m2r.py`
 
 **1 — Exporting** (on the old panel's server): pick the panel by number, enter the output directory (Enter = `/root`). The script reads the panel's `.env` (paths in the Persian table above) to find the database, or asks for the `.env` or database file if it can't find it. It writes `m2r_<panel>_<date>.sql` (mode 600, since it holds password hashes).
 
